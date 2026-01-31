@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from utils import helpers
-from hishel.httpx import AsyncCacheClient
+from config import lifespan
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 # Endpoint raiz
 @app.get("/")
