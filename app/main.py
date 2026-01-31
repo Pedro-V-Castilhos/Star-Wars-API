@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from utils import helpers
 from hishel.httpx import AsyncCacheClient
 
 app = FastAPI()
@@ -11,13 +12,9 @@ async def root():
 # Endpoint para solicitar dados de todos os filmes
 @app.get("/films")
 async def get_films():
-    async with AsyncCacheClient() as client:
-        response = await client.get("https://swapi.dev/api/films/")
-    return response.json()
+    return await helpers.get_from_url("https://swapi.dev/api/films/")
 
 # Endpoint para solicitar dados de um filme específico pelo ID
 @app.get("/films/{film_id}")
 async def get_film(film_id: int):
-    async with AsyncCacheClient() as client:
-        response = await client.get(f"https://swapi.dev/api/films/{film_id}/")
-    return response.json()
+    return await helpers.get_from_url(f"https://swapi.dev/api/films/{film_id}/")
