@@ -3,41 +3,41 @@ from app.utils import helpers
 from fastapi import Request
 
 # Endpoint para solicitar dados de todos os personagens
-@router.get("/", tags=["Characters"])
+@router.get("/")
 async def get_characters(request: Request, search: str = ""):
     return await helpers.get_from_url(f"https://swapi.dev/api/people/?search={search}", request)
 
 # Endpoint para solicitar dados de um personagem específico pelo ID
-@router.get("/{character_id}", tags=["Characters"])
+@router.get("/{character_id}")
 async def get_character(character_id: int, request: Request):
     return await helpers.get_from_url(f"https://swapi.dev/api/people/{character_id}/", request)
 
 # Endpoint para solicitar dados dos filmes de um personagem específico pelo ID
-@router.get("/{character_id}/films", tags=["Films"])
+@router.get("/{character_id}/films")
 async def get_character_films(character_id: int, request: Request):
     responses = await helpers.get_all_from_url(f"https://swapi.dev/api/people/{character_id}/","films", request)
     return responses
 
 # Endpoint para solicitar dados dos veículos de um personagem específico pelo ID
-@router.get("/{character_id}/vehicles", tags=["Vehicles"])
+@router.get("/{character_id}/vehicles")
 async def get_character_vehicles(character_id: int, request: Request):
     responses = await helpers.get_all_from_url(f"https://swapi.dev/api/people/{character_id}/","vehicles", request)
     return responses
 
 # Endpoint para solicitar dados das naves de um personagem específico pelo ID
-@router.get("/{character_id}/starships", tags=["Starships"])
+@router.get("/{character_id}/starships")
 async def get_character_starships(character_id: int, request: Request):
     responses = await helpers.get_all_from_url(f"https://swapi.dev/api/people/{character_id}/","starships", request)
     return responses
 
 # Endpoint para solicitar dados das espécies de um personagem específico pelo ID
-@router.get("/{character_id}/species", tags=["Species"])
+@router.get("/{character_id}/species")
 async def get_character_species(character_id: int, request: Request):
     responses = await helpers.get_all_from_url(f"https://swapi.dev/api/people/{character_id}/","species", request)
     return responses
 
 # Endpoint para solicitar dados do planeta natal de um personagem específico pelo ID
-@router.get("/{character_id}/homeworld", tags=["Planets"])
+@router.get("/{character_id}/homeworld")
 async def get_character_homeworld(character_id: int, request: Request):
     character_data = await helpers.get_from_url(f"https://swapi.dev/api/people/{character_id}/", request)
     homeworld_data = await helpers.get_from_url(character_data["homeworld"], request)
