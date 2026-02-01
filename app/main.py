@@ -24,7 +24,5 @@ async def get_film(film_id: int, request: Request):
 @app.get("/films/{film_id}/characters")
 async def get_film_characters(film_id: int, request: Request):
     film_data = await helpers.get_from_url(f"https://swapi.dev/api/films/{film_id}/", request)
-    character_urls = film_data.get("characters")
-    tasks = [helpers.get_from_url(url, request) for url in character_urls]
-    responses = await asyncio.gather(*tasks)
+    responses = await helpers.get_all_from_urls(film_data["characters"], request)
     return {"results": responses}
