@@ -13,7 +13,8 @@ Atualmente você está desenvolvendo uma Rest API que irá consumir dados do end
   _ httpx (0.28.1)
   _ hishel (1.1.8)
   _ anysqlite (0.0.5)
-  \_ uvicorn (0.40.0)
+  _ pytest (9.0.2)
+  _ uvicorn (0.40.0)
 
 ## Orientações:
 
