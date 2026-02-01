@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .api.router import films_router
+from .api.router import films_router, characters_router
 from .config import lifespan
 
 app = FastAPI(lifespan=lifespan)
@@ -10,3 +10,4 @@ async def root():
     return {"greetings": "May the Force be with you!"}
 
 app.include_router(films_router)
+app.include_router(characters_router)

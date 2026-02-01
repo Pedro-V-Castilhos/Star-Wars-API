@@ -5,4 +5,9 @@ films_router = APIRouter(
     tags=["Films"],
 )
 
-from .endpoints import films
+characters_router = APIRouter(
+    prefix="/characters",
+    tags=["Characters"],
+)
+
+from .endpoints import films, characters
