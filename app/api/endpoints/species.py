@@ -23,3 +23,10 @@ async def get_species_films(species_id: int, request: Request):
 async def get_species_people(species_id: int, request: Request):
     responses = await helpers.get_all_from_url(f"https://swapi.dev/api/species/{species_id}/","people", request)
     return responses
+
+# Endpoint para solicitar dados do planeta natal de uma espécie específica pelo ID
+@router.get("/{species_id}/homeworld", tags=["Planets"])
+async def get_species_homeworld(species_id: int, request: Request):
+    species_data = await helpers.get_from_url(f"https://swapi.dev/api/species/{species_id}/", request)
+    homeworld_data = await helpers.get_from_url(species_data["homeworld"], request)
+    return homeworld_data
