@@ -79,14 +79,6 @@ A API fornece **34 endpoints** organizados em 6 recursos principais. Todos os en
 
 Endpoint raiz de boas-vindas.
 
-**Resposta:**
-
-```json
-{
-  "greetings": "May the Force be with you!"
-}
-```
-
 ---
 
 ### 🎬 Films (7 endpoints)
@@ -99,37 +91,6 @@ Retorna informações sobre todos os filmes da saga Star Wars.
 
 - `search` (string): Busca filmes por título
 
-**Exemplo:** `GET /films?search=empire`
-
-**Resposta:**
-
-```json
-{
-  "count": 6,
-  "next": null,
-  "previous": null,
-  "results": [
-    {
-      "title": "A New Hope",
-      "episode_id": 4,
-      "opening_crawl": "...",
-      "director": "George Lucas",
-      "producer": "Gary Kurtz, Rick McCallum",
-      "release_date": "1977-05-25",
-      "characters": [...],
-      "planets": [...],
-      "starships": [...],
-      "vehicles": [...],
-      "species": [...],
-      "created": "2014-12-10T14:23:31.880000Z",
-      "edited": "2014-12-20T19:49:45.256000Z",
-      "url": "https://swapi.dev/api/films/1/"
-    }
-    // ... outros filmes
-  ]
-}
-```
-
 #### `GET /films/{film_id}`
 
 Retorna informações detalhadas sobre um filme específico.
@@ -137,32 +98,6 @@ Retorna informações detalhadas sobre um filme específico.
 **Parâmetros:**
 
 - `film_id` (int): ID do filme (1-6)
-
-**Exemplo:** `GET /films/1`
-
-**Resposta:**
-
-```json
-{
-  "title": "A New Hope",
-  "episode_id": 4,
-  "opening_crawl": "It is a period of civil war...",
-  "director": "George Lucas",
-  "producer": "Gary Kurtz, Rick McCallum",
-  "release_date": "1977-05-25",
-  "characters": [
-    "https://swapi.dev/api/people/1/",
-    "https://swapi.dev/api/people/2/"
-  ],
-  "planets": [...],
-  "starships": [...],
-  "vehicles": [...],
-  "species": [...],
-  "created": "2014-12-10T14:23:31.880000Z",
-  "edited": "2014-12-20T19:49:45.256000Z",
-  "url": "https://swapi.dev/api/films/1/"
-}
-```
 
 #### `GET /films/{film_id}/characters`
 
@@ -172,53 +107,39 @@ Retorna todos os personagens que aparecem em um filme específico.
 
 - `film_id` (int): ID do filme (1-6)
 
-**Exemplo:** `GET /films/1/characters`
-
-**Resposta:**
-
-```json
-{
-  "results": [
-    {
-      "name": "Luke Skywalker",
-      "height": "172",
-      "mass": "77",
-      "hair_color": "blond",
-      "skin_color": "fair",
-      "eye_color": "blue",
-      "birth_year": "19BBY",
-      "gender": "male",
-      "homeworld": "https://swapi.dev/api/planets/1/",
-      "films": [...],
-      "species": [],
-      "vehicles": [...],
-      "starships": [...],
-      "created": "2014-12-09T13:50:51.644000Z",
-      "edited": "2014-12-20T21:17:56.891000Z",
-      "url": "https://swapi.dev/api/people/1/"
-    }
-    // ... outros personagens
-  ]
-}
-```
-
 **Nota:** Este endpoint realiza múltiplas requisições em paralelo para buscar os dados de todos os personagens, otimizando o tempo de resposta.
 
 #### `GET /films/{film_id}/planets`
 
 Retorna todos os planetas que aparecem em um filme específico.
 
+**Parâmetros:**
+
+- `film_id` (int): ID do filme (1-6)
+
 #### `GET /films/{film_id}/starships`
 
 Retorna todas as naves estelares que aparecem em um filme específico.
+
+**Parâmetros:**
+
+- `film_id` (int): ID do filme (1-6)
 
 #### `GET /films/{film_id}/vehicles`
 
 Retorna todos os veículos que aparecem em um filme específico.
 
+**Parâmetros:**
+
+- `film_id` (int): ID do filme (1-6)
+
 #### `GET /films/{film_id}/species`
 
 Retorna todas as espécies que aparecem em um filme específico.
+
+**Parâmetros:**
+
+- `film_id` (int): ID do filme (1-6)
 
 ---
 
@@ -234,25 +155,49 @@ Retorna todos os personagens.
 
 Retorna detalhes de um personagem específico.
 
+**Parâmetros:**
+
+- `character_id` (int): ID do personagem
+
 #### `GET /characters/{character_id}/films`
 
 Retorna todos os filmes em que o personagem aparece.
+
+**Parâmetros:**
+
+- `character_id` (int): ID do personagem
 
 #### `GET /characters/{character_id}/vehicles`
 
 Retorna todos os veículos pilotados pelo personagem.
 
+**Parâmetros:**
+
+- `character_id` (int): ID do personagem
+
 #### `GET /characters/{character_id}/starships`
 
 Retorna todas as naves pilotadas pelo personagem.
+
+**Parâmetros:**
+
+- `character_id` (int): ID do personagem
 
 #### `GET /characters/{character_id}/species`
 
 Retorna a(s) espécie(s) do personagem.
 
+**Parâmetros:**
+
+- `character_id` (int): ID do personagem
+
 #### `GET /characters/{character_id}/homeworld`
 
 Retorna o planeta natal do personagem.
+
+**Parâmetros:**
+
+- `character_id` (int): ID do personagem
 
 ---
 
@@ -268,13 +213,25 @@ Retorna todos os planetas.
 
 Retorna detalhes de um planeta específico.
 
+**Parâmetros:**
+
+- `planet_id` (int): ID do planeta
+
 #### `GET /planets/{planet_id}/films`
 
 Retorna todos os filmes em que o planeta aparece.
 
+**Parâmetros:**
+
+- `planet_id` (int): ID do planeta
+
 #### `GET /planets/{planet_id}/residents`
 
 Retorna todos os residentes do planeta.
+
+**Parâmetros:**
+
+- `planet_id` (int): ID do planeta
 
 ---
 
@@ -284,19 +241,31 @@ Retorna todos os residentes do planeta.
 
 Retorna todas as naves estelares.
 
-**Parâmetros:** `?search=<nome>` para busca por nome.
+**Parâmetros:** `?search=<nome>` para busca por nome ou modelo.
 
 #### `GET /starships/{starship_id}`
 
 Retorna detalhes de uma nave específica.
 
+**Parâmetros:**
+
+- `starship_id` (int): ID da nave
+
 #### `GET /starships/{starship_id}/films`
 
 Retorna todos os filmes em que a nave aparece.
 
+**Parâmetros:**
+
+- `starship_id` (int): ID da nave
+
 #### `GET /starships/{starship_id}/pilots`
 
 Retorna todos os pilotos da nave.
+
+**Parâmetros:**
+
+- `starship_id` (int): ID da nave
 
 ---
 
@@ -306,19 +275,31 @@ Retorna todos os pilotos da nave.
 
 Retorna todos os veículos.
 
-**Parâmetros:** `?search=<nome>` para busca por nome.
+**Parâmetros:** `?search=<nome>` para busca por nome ou modelo.
 
 #### `GET /vehicles/{vehicle_id}`
 
 Retorna detalhes de um veículo específico.
 
+**Parâmetros:**
+
+- `vehicle_id` (int): ID do veículo
+
 #### `GET /vehicles/{vehicle_id}/films`
 
 Retorna todos os filmes em que o veículo aparece.
 
+**Parâmetros:**
+
+- `vehicle_id` (int): ID do veículo
+
 #### `GET /vehicles/{vehicle_id}/pilots`
 
 Retorna todos os pilotos do veículo.
+
+**Parâmetros:**
+
+- `vehicle_id` (int): ID do veículo
 
 ---
 
@@ -334,17 +315,33 @@ Retorna todas as espécies.
 
 Retorna detalhes de uma espécie específica.
 
+**Parâmetros:**
+
+- `species_id` (int): ID da espécie
+
 #### `GET /species/{species_id}/films`
 
 Retorna todos os filmes em que a espécie aparece.
+
+**Parâmetros:**
+
+- `species_id` (int): ID da espécie
 
 #### `GET /species/{species_id}/people`
 
 Retorna todos os personagens da espécie.
 
+**Parâmetros:**
+
+- `species_id` (int): ID da espécie
+
 #### `GET /species/{species_id}/homeworld`
 
 Retorna o planeta natal da espécie.
+
+**Parâmetros:**
+
+- `species_id` (int): ID da espécie
 
 ---
 
