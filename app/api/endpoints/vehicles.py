@@ -3,12 +3,12 @@ from app.utils import helpers
 from fastapi import Request
 
 # Endpoint para solicitar dados de todas os veículos
-@router.get("/")
+@router.get("/", tags=["Vehicles"])
 async def get_vehicles(request: Request, search: str = ""):
     return await helpers.get_from_url(f"https://swapi.dev/api/vehicles/?search={search}", request)
 
 # Endpoint para solicitar dados de um veículo específico pelo ID
-@router.get("/{vehicle_id}")
+@router.get("/{vehicle_id}", tags=["Vehicles"])
 async def get_vehicle(vehicle_id: int, request: Request):
     return await helpers.get_from_url(f"https://swapi.dev/api/vehicles/{vehicle_id}/", request)
 

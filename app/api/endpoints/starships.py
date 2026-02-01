@@ -3,12 +3,12 @@ from app.utils import helpers
 from fastapi import Request
 
 # Endpoint para solicitar dados de todas as naves espaciais
-@router.get("/")
+@router.get("/", tags=["Starships"])
 async def get_starships(request: Request, search: str = ""):
     return await helpers.get_from_url(f"https://swapi.dev/api/starships/?search={search}", request)
 
 # Endpoint para solicitar dados de uma nave espacial específica pelo ID
-@router.get("/{starship_id}")
+@router.get("/{starship_id}", tags=["Starships"])
 async def get_starship(starship_id: int, request: Request):
     return await helpers.get_from_url(f"https://swapi.dev/api/starships/{starship_id}/", request)
 

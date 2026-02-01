@@ -3,12 +3,12 @@ from app.utils import helpers
 from fastapi import Request
 
 # Endpoint para solicitar dados de todos os personagens
-@router.get("/")
+@router.get("/", tags=["Characters"])
 async def get_characters(request: Request, search: str = ""):
     return await helpers.get_from_url(f"https://swapi.dev/api/people/?search={search}", request)
 
 # Endpoint para solicitar dados de um personagem específico pelo ID
-@router.get("/{character_id}")
+@router.get("/{character_id}", tags=["Characters"])
 async def get_character(character_id: int, request: Request):
     return await helpers.get_from_url(f"https://swapi.dev/api/people/{character_id}/", request)
 

@@ -3,12 +3,12 @@ from app.utils import helpers
 from fastapi import Request
 
 # Endpoint para solicitar dados de todos os planetas
-@router.get("/")
+@router.get("/", tags=["Planets"])
 async def get_planets(request: Request, search: str = ""):
     return await helpers.get_from_url(f"https://swapi.dev/api/planets/?search={search}", request)
 
 # Endpoint para solicitar dados de um planeta específico pelo ID
-@router.get("/{planet_id}")
+@router.get("/{planet_id}", tags=["Planets"])
 async def get_planet(planet_id: int, request: Request):
     return await helpers.get_from_url(f"https://swapi.dev/api/planets/{planet_id}/", request)
 

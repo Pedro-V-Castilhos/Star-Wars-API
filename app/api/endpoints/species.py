@@ -3,12 +3,12 @@ from app.utils import helpers
 from fastapi import Request
 
 # Endpoint para solicitar dados de todas as espécies
-@router.get("/")
+@router.get("/", tags=["Species"])
 async def get_species(request: Request, search: str = ""):
     return await helpers.get_from_url(f"https://swapi.dev/api/species/?search={search}", request)
 
 # Endpoint para solicitar dados de uma espécie específica pelo ID
-@router.get("/{species_id}")
+@router.get("/{species_id}", tags=["Species"])
 async def get_species_by_id(species_id: int, request: Request):
     return await helpers.get_from_url(f"https://swapi.dev/api/species/{species_id}/", request)
 
