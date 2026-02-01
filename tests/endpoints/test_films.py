@@ -3,6 +3,7 @@ import pytest
 # Teste de todas as urls que retornam arrays com "results"
 @pytest.mark.parametrize("array_urls", [
     "/films/",
+    "/films/1/characters",
     "/films/1/planets",
     "/films/1/starships",
     "/films/1/vehicles",
