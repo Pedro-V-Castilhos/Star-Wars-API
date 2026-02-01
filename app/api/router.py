@@ -20,4 +20,9 @@ vehicles_router = APIRouter(
     tags=["Vehicles"],
 )
 
-from .endpoints import films, characters, starships, vehicles
+species_router = APIRouter(
+    prefix="/species",
+    tags=["Species"],
+)
+
+from .endpoints import films, characters, starships, vehicles, species
