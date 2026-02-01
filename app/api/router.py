@@ -25,4 +25,9 @@ species_router = APIRouter(
     tags=["Species"],
 )
 
-from .endpoints import films, characters, starships, vehicles, species
+planets_router = APIRouter(
+    prefix="/planets",
+    tags=["Planets"],
+)
+
+from .endpoints import films, characters, starships, vehicles, species, planets
