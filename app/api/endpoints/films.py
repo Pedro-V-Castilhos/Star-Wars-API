@@ -4,8 +4,8 @@ from fastapi import Request
 
 # Endpoint para solicitar dados de todos os filmes
 @router.get("/")
-async def get_films(request: Request):
-    return await helpers.get_from_url("https://swapi.dev/api/films/", request)
+async def get_films(request: Request, search: str = ""):
+    return await helpers.get_from_url(f"https://swapi.dev/api/films/?search={search}", request)
 
 # Endpoint para solicitar dados de um filme específico pelo ID
 @router.get("/{film_id}")
