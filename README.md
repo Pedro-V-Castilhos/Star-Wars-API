@@ -4,12 +4,19 @@ API REST para consumo especializado de dados sobre o universo de Star Wars, func
 
 ## 🚀 Tecnologias
 
+### Produção
+
 - **Python 3.14**
 - **FastAPI 0.128.0** - Framework web moderno e de alta performance
 - **httpx 0.28.1** - Cliente HTTP assíncrono
 - **hishel 1.1.8** - Sistema de cache HTTP com suporte SQLite
 - **anysqlite 0.0.5** - Driver SQLite assíncrono
 - **uvicorn 0.40.0** - Servidor ASGI
+
+### Desenvolvimento e Testes
+
+- **pytest 9.0.2** - Framework de testes robusto e flexível
+- **pytest-cov 7.0.0** - Plugin para análise de cobertura de código
 
 ## 📋 Pré-requisitos
 
@@ -52,11 +59,23 @@ uvicorn app.main:app --reload --port 3000
 ```
 
 A API estará disponível em: `http://localhost:8000`
-Documentação interativa (Swagger): `http://localhost:8000/docs`
 
-## 📚 Endpoints
+### 📖 Documentação Automática
 
-### `GET /`
+O FastAPI gera automaticamente documentação interativa completa de todos os endpoints:
+
+- **Swagger UI**: `http://localhost:8000/docs` - Interface interativa para testar endpoints
+- **ReDoc**: `http://localhost:8000/redoc` - Documentação alternativa em formato limpo
+
+Ambas interfaces permitem explorar todos os 34 endpoints da API, ver schemas de resposta e executar requisições diretamente do navegador.
+
+## 📚 Endpoints da API
+
+A API fornece **34 endpoints** organizados em 6 recursos principais. Todos os endpoints de listagem suportam busca via parâmetro `?search=<termo>`.
+
+### 🏠 Root
+
+#### `GET /`
 
 Endpoint raiz de boas-vindas.
 
@@ -68,9 +87,19 @@ Endpoint raiz de boas-vindas.
 }
 ```
 
-### `GET /films`
+---
+
+### 🎬 Films (7 endpoints)
+
+##### `GET /films`
 
 Retorna informações sobre todos os filmes da saga Star Wars.
+
+**Parâmetros de Query (opcionais):**
+
+- `search` (string): Busca filmes por título
+
+**Exemplo:** `GET /films?search=empire`
 
 **Resposta:**
 
@@ -101,7 +130,7 @@ Retorna informações sobre todos os filmes da saga Star Wars.
 }
 ```
 
-### `GET /films/{film_id}`
+#### `GET /films/{film_id}`
 
 Retorna informações detalhadas sobre um filme específico.
 
@@ -135,7 +164,7 @@ Retorna informações detalhadas sobre um filme específico.
 }
 ```
 
-### `GET /films/{film_id}/characters`
+#### `GET /films/{film_id}/characters`
 
 Retorna todos os personagens que aparecem em um filme específico.
 
@@ -175,6 +204,214 @@ Retorna todos os personagens que aparecem em um filme específico.
 
 **Nota:** Este endpoint realiza múltiplas requisições em paralelo para buscar os dados de todos os personagens, otimizando o tempo de resposta.
 
+#### `GET /films/{film_id}/planets`
+
+Retorna todos os planetas que aparecem em um filme específico.
+
+#### `GET /films/{film_id}/starships`
+
+Retorna todas as naves estelares que aparecem em um filme específico.
+
+#### `GET /films/{film_id}/vehicles`
+
+Retorna todos os veículos que aparecem em um filme específico.
+
+#### `GET /films/{film_id}/species`
+
+Retorna todas as espécies que aparecem em um filme específico.
+
+---
+
+### 👥 Characters (7 endpoints)
+
+#### `GET /characters`
+
+Retorna todos os personagens.
+
+**Parâmetros:** `?search=<nome>` para busca por nome.
+
+#### `GET /characters/{character_id}`
+
+Retorna detalhes de um personagem específico.
+
+#### `GET /characters/{character_id}/films`
+
+Retorna todos os filmes em que o personagem aparece.
+
+#### `GET /characters/{character_id}/vehicles`
+
+Retorna todos os veículos pilotados pelo personagem.
+
+#### `GET /characters/{character_id}/starships`
+
+Retorna todas as naves pilotadas pelo personagem.
+
+#### `GET /characters/{character_id}/species`
+
+Retorna a(s) espécie(s) do personagem.
+
+#### `GET /characters/{character_id}/homeworld`
+
+Retorna o planeta natal do personagem.
+
+---
+
+### 🪐 Planets (4 endpoints)
+
+#### `GET /planets`
+
+Retorna todos os planetas.
+
+**Parâmetros:** `?search=<nome>` para busca por nome.
+
+#### `GET /planets/{planet_id}`
+
+Retorna detalhes de um planeta específico.
+
+#### `GET /planets/{planet_id}/films`
+
+Retorna todos os filmes em que o planeta aparece.
+
+#### `GET /planets/{planet_id}/residents`
+
+Retorna todos os residentes do planeta.
+
+---
+
+### 🚀 Starships (4 endpoints)
+
+#### `GET /starships`
+
+Retorna todas as naves estelares.
+
+**Parâmetros:** `?search=<nome>` para busca por nome.
+
+#### `GET /starships/{starship_id}`
+
+Retorna detalhes de uma nave específica.
+
+#### `GET /starships/{starship_id}/films`
+
+Retorna todos os filmes em que a nave aparece.
+
+#### `GET /starships/{starship_id}/pilots`
+
+Retorna todos os pilotos da nave.
+
+---
+
+### 🛸 Vehicles (4 endpoints)
+
+#### `GET /vehicles`
+
+Retorna todos os veículos.
+
+**Parâmetros:** `?search=<nome>` para busca por nome.
+
+#### `GET /vehicles/{vehicle_id}`
+
+Retorna detalhes de um veículo específico.
+
+#### `GET /vehicles/{vehicle_id}/films`
+
+Retorna todos os filmes em que o veículo aparece.
+
+#### `GET /vehicles/{vehicle_id}/pilots`
+
+Retorna todos os pilotos do veículo.
+
+---
+
+### 🦎 Species (5 endpoints)
+
+#### `GET /species`
+
+Retorna todas as espécies.
+
+**Parâmetros:** `?search=<nome>` para busca por nome.
+
+#### `GET /species/{species_id}`
+
+Retorna detalhes de uma espécie específica.
+
+#### `GET /species/{species_id}/films`
+
+Retorna todos os filmes em que a espécie aparece.
+
+#### `GET /species/{species_id}/people`
+
+Retorna todos os personagens da espécie.
+
+#### `GET /species/{species_id}/homeworld`
+
+Retorna o planeta natal da espécie.
+
+---
+
+## 🧪 Testes Automatizados
+
+O projeto implementa testes unitários abrangentes usando **pytest** com análise de cobertura via **pytest-cov**.
+
+### Estrutura de Testes
+
+- **Cliente de teste único**: Fixture `client` compartilhada em [conftest.py](tests/conftest.py) usando `TestClient` do FastAPI
+- **Testes parametrizados**: URLs serializadas em arrays para testes eficientes de múltiplos endpoints
+- **Cobertura completa**: Todos os 34 endpoints possuem testes automatizados
+
+### Como Executar os Testes
+
+#### Executar todos os testes:
+
+```bash
+pytest
+```
+
+#### Executar testes com relatório de cobertura:
+
+```bash
+pytest --cov=app --cov-report=term-missing
+```
+
+#### Gerar relatório HTML de cobertura:
+
+```bash
+pytest --cov=app --cov-report=html
+```
+
+O relatório HTML será gerado em `htmlcov/index.html`.
+
+#### Executar testes de um módulo específico:
+
+```bash
+pytest tests/endpoints/test_characters.py
+```
+
+### Padrões de Teste Implementados
+
+1. **Testes de resposta com array**: Validam que endpoints de listagem retornam `{"results": [...]}`
+2. **Testes de busca**: Verificam funcionalidade de `?search=` em todos os recursos
+3. **Testes de entidades**: Validam resposta de endpoints específicos (por ID)
+4. **Testes de recursos relacionados**: Verificam endpoints de relacionamentos (ex: `/films/{id}/characters`)
+
+### Fixture Compartilhada
+
+Todos os testes utilizam a fixture `client` definida em [conftest.py](tests/conftest.py):
+
+```python
+@pytest.fixture
+def client():
+    with TestClient(app) as client:
+        yield client
+```
+
+Esta abordagem garante:
+
+- ✅ **Isolamento**: Cada teste recebe um cliente limpo
+- ✅ **Eficiência**: Cliente é reutilizado sem overhead de criação repetida
+- ✅ **Consistência**: Todos os testes usam a mesma configuração
+
+---
+
 ## 🏗️ Arquitetura
 
 A aplicação utiliza uma arquitetura em camadas com foco em performance e reutilização:
@@ -202,10 +439,92 @@ async def lifespan(app: FastAPI):
 - ✅ Cliente compartilhado entre todas as requisições
 - ✅ Gerenciamento eficiente de recursos
 
+### Routers Modulares
+
+A aplicação utiliza **6 routers independentes** organizados em [router.py](app/api/router.py), cada um responsável por um recurso específico:
+
+| Router              | Prefixo       | Tag        | Arquivo                                          |
+| ------------------- | ------------- | ---------- | ------------------------------------------------ |
+| `films_router`      | `/films`      | Films      | [films.py](app/api/endpoints/films.py)           |
+| `characters_router` | `/characters` | Characters | [characters.py](app/api/endpoints/characters.py) |
+| `planets_router`    | `/planets`    | Planets    | [planets.py](app/api/endpoints/planets.py)       |
+| `starships_router`  | `/starships`  | Starships  | [starships.py](app/api/endpoints/starships.py)   |
+| `vehicles_router`   | `/vehicles`   | Vehicles   | [vehicles.py](app/api/endpoints/vehicles.py)     |
+| `species_router`    | `/species`    | Species    | [species.py](app/api/endpoints/species.py)       |
+
+**Benefícios:**
+
+- ✅ Separação clara de responsabilidades
+- ✅ Facilita manutenção e escalabilidade
+- ✅ Organização automática na documentação do FastAPI
+- ✅ Reduz acoplamento entre recursos
+
 ### Helpers Reutilizáveis
 
-- **`get_from_url()`**: Centraliza requisições HTTP com cache automático
-- **`get_all_from_urls()`**: Executa múltiplas requisições em paralelo com `asyncio.gather()`
+O arquivo [helpers.py](app/utils/helpers.py) contém **3 funções auxiliares** que eliminam duplicação de código:
+
+#### `fetch_data(url: str, request: Request) -> dict`
+
+Busca dados de uma única URL usando o cliente HTTP com cache.
+
+```python
+async def fetch_data(url: str, request: Request) -> dict:
+    cache_client = request.app.state.cache_client
+    response = await cache_client.get(url)
+    return response.json()
+```
+
+**Uso:** Endpoints de detalhes (ex: `/films/1/`)
+
+#### `get_all_from_url(url: str, data: str, request: Request) -> dict`
+
+Busca uma entidade, extrai um array específico de URLs relacionadas e busca todas em paralelo.
+
+```python
+async def get_all_from_url(url: str, data: str, request: Request) -> dict:
+    entity = await fetch_data(url, request)
+    urls = entity.get(data, [])
+    results = await fetch_multiple_urls(urls, request)
+    return {"results": results}
+```
+
+**Uso:** Endpoints de recursos relacionados (ex: `/films/1/characters`)
+
+#### `fetch_multiple_urls(urls: list[str], request: Request) -> list[dict]`
+
+Executa múltiplas requisições HTTP em paralelo usando `asyncio.gather()`.
+
+```python
+async def fetch_multiple_urls(urls: list[str], request: Request) -> list[dict]:
+    tasks = [fetch_data(url, request) for url in urls]
+    return await asyncio.gather(*tasks)
+```
+
+**Benefício:** Reduz tempo de resposta drasticamente ao buscar dados relacionados.
+
+**Exemplo prático:**
+
+Buscar 18 personagens de um filme:
+
+- **Sem paralelização**: ~1.8 segundos (18 × 100ms)
+- **Com `asyncio.gather()`**: ~100-200ms (todas simultâneas)
+
+### Padrão de Resposta
+
+Todos os endpoints que retornam múltiplos recursos seguem o padrão:
+
+```json
+{
+  "results": [
+    {
+      /* objeto 1 */
+    },
+    {
+      /* objeto 2 */
+    }
+  ]
+}
+```
 
 ### Estrutura de Diretórios
 
@@ -216,20 +535,43 @@ app/
 ├── config.py            # Configuração do cache client e lifespan
 ├── api/
 │   ├── __init__.py
-│   ├── router.py        # Definição dos routers da aplicação
+│   ├── router.py        # Registro de todos os routers
 │   └── endpoints/
 │       ├── __init__.py
-│       └── films.py     # Endpoints de filmes
+│       ├── films.py        # 7 endpoints de filmes
+│       ├── characters.py   # 7 endpoints de personagens
+│       ├── planets.py      # 4 endpoints de planetas
+│       ├── starships.py    # 4 endpoints de naves
+│       ├── vehicles.py     # 4 endpoints de veículos
+│       └── species.py      # 5 endpoints de espécies
 └── utils/
     ├── __init__.py
-    └── helpers.py       # Funções auxiliares reutilizáveis
+    └── helpers.py       # 3 funções auxiliares reutilizáveis
+tests/
+├── __init__.py
+├── conftest.py          # Fixture 'client' compartilhada
+├── test_main.py         # Testes do endpoint raiz
+└── endpoints/
+    ├── __init__.py
+    ├── test_films.py
+    ├── test_characters.py
+    ├── test_planets.py
+    ├── test_starships.py
+    ├── test_vehicles.py
+    └── test_species.py
 prompts/
-├── 01.md                # Prompts de desenvolvimento
-├── 02.md
-└── Context.md
+├── 01.md                # Implementação inicial
+├── 02.md                # Expansão da API
+├── 03.md                # Atualização de documentação
+└── Context.md           # Contexto do projeto
 ```
 
-**Organização modular** que facilita escalabilidade e manutenção do código.
+**Arquitetura modular** que facilita:
+
+- ✅ Escalabilidade horizontal (novos recursos)
+- ✅ Manutenção isolada por recurso
+- ✅ Testes organizados espelhando estrutura da aplicação
+- ✅ Reutilização de código via helpers
 
 ## � Organização de Prompts
 
@@ -237,8 +579,9 @@ O projeto mantém um histórico estruturado dos prompts utilizados durante o des
 
 ```
 prompts/
-├── 01.md          # Implementação inicial da API
-├── 02.md          # Atualização da documentação
+├── 01.md          # Implementação inicial da API (estrutura base)
+├── 02.md          # Expansão com todos os recursos (characters, planets, etc.)
+├── 03.md          # Atualização da documentação e testes
 └── Context.md     # Contexto e instruções para o desenvolvimento
 ```
 
