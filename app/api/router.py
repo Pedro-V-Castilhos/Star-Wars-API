@@ -15,4 +15,4 @@ starships_router = APIRouter(
     tags=["Starships"],
 )
 
-from .endpoints import films, characters
+from .endpoints import films, characters, starships
