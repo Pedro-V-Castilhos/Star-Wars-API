@@ -135,27 +135,120 @@ Retorna informações detalhadas sobre um filme específico.
 }
 ```
 
+### `GET /films/{film_id}/characters`
+
+Retorna todos os personagens que aparecem em um filme específico.
+
+**Parâmetros:**
+
+- `film_id` (int): ID do filme (1-6)
+
+**Exemplo:** `GET /films/1/characters`
+
+**Resposta:**
+
+```json
+{
+  "results": [
+    {
+      "name": "Luke Skywalker",
+      "height": "172",
+      "mass": "77",
+      "hair_color": "blond",
+      "skin_color": "fair",
+      "eye_color": "blue",
+      "birth_year": "19BBY",
+      "gender": "male",
+      "homeworld": "https://swapi.dev/api/planets/1/",
+      "films": [...],
+      "species": [],
+      "vehicles": [...],
+      "starships": [...],
+      "created": "2014-12-09T13:50:51.644000Z",
+      "edited": "2014-12-20T21:17:56.891000Z",
+      "url": "https://swapi.dev/api/people/1/"
+    }
+    // ... outros personagens
+  ]
+}
+```
+
+**Nota:** Este endpoint realiza múltiplas requisições em paralelo para buscar os dados de todos os personagens, otimizando o tempo de resposta.
+
 ## 🏗️ Arquitetura
 
-A aplicação utiliza uma arquitetura em camadas:
+A aplicação utiliza uma arquitetura em camadas com foco em performance e reutilização:
 
-- **Cache HTTP Assíncrono**: Implementado com Hishel + SQLite, gerenciado no ciclo de vida da aplicação (lifespan) para reutilização eficiente das conexões
-- **Helper Reutilizável**: Função `get_from_url()` centraliza requisições HTTP com cache automático, evitando repetição de código
-- **Cliente Global**: `AsyncCacheClient` inicializado uma única vez e compartilhado entre todas as requisições
+### Cliente HTTP Global com Cache
+
+O projeto implementa um **cliente HTTP global com cache automático** usando:
+
+- **Hishel 1.1.8**: Sistema de cache HTTP com suporte a múltiplos backends
+- **SQLite**: Armazenamento persistente do cache via anysqlite
+- **AsyncCacheClient**: Cliente gerenciado no ciclo de vida da aplicação (lifespan)
+
+```python
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    app.state.cache_client = AsyncCacheClient()
+    yield
+    await app.state.cache_client.aclose()
+```
+
+**Benefícios:**
+
+- ✅ Cache automático de respostas HTTP
+- ✅ Redução de latência em requisições repetidas
+- ✅ Cliente compartilhado entre todas as requisições
+- ✅ Gerenciamento eficiente de recursos
+
+### Helpers Reutilizáveis
+
+- **`get_from_url()`**: Centraliza requisições HTTP com cache automático
+- **`get_all_from_urls()`**: Executa múltiplas requisições em paralelo com `asyncio.gather()`
 
 ### Estrutura de Diretórios
 
 ```
 app/
 ├── __init__.py
-├── main.py          # Definição de rotas e aplicação FastAPI
-├── config.py        # Configuração do cache client e lifespan
+├── main.py              # Aplicação FastAPI principal
+├── config.py            # Configuração do cache client e lifespan
+├── api/
+│   ├── __init__.py
+│   ├── router.py        # Definição dos routers da aplicação
+│   └── endpoints/
+│       ├── __init__.py
+│       └── films.py     # Endpoints de filmes
 └── utils/
     ├── __init__.py
-    └── helpers.py   # Funções auxiliares reutilizáveis
+    └── helpers.py       # Funções auxiliares reutilizáveis
+prompts/
+├── 01.md                # Prompts de desenvolvimento
+├── 02.md
+└── Context.md
 ```
 
-## 📝 Licença
+**Organização modular** que facilita escalabilidade e manutenção do código.
+
+## � Organização de Prompts
+
+O projeto mantém um histórico estruturado dos prompts utilizados durante o desenvolvimento na pasta `prompts/`:
+
+```
+prompts/
+├── 01.md          # Implementação inicial da API
+├── 02.md          # Atualização da documentação
+└── Context.md     # Contexto e instruções para o desenvolvimento
+```
+
+Esta organização permite:
+
+- 📝 Rastreabilidade das decisões de desenvolvimento
+- 🔄 Facilita replicação e entendimento do processo
+- 📚 Serve como documentação evolutiva do projeto
+
+## �📝 Licença
 
 Este projeto está sob a licença MIT.
 
