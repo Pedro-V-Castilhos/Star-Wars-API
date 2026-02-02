@@ -1,0 +1,607 @@
+swagger: "2.0"
+info:
+  title: sw-api
+  version: "1.0.0"
+schemes:
+  - https
+
+paths:
+  /:
+    get:
+      operationId: root
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films:
+    get:
+      operationId: list_films
+      tags:
+        - Films
+      parameters:
+        - name: search
+          in: query
+          type: string
+          required: false
+          description: Search films by title
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films/{film_id}:
+    get:
+      operationId: get_film
+      tags:
+        - Films
+      parameters:
+        - name: film_id
+          in: path
+          type: integer
+          required: true
+          description: Film ID (1-6)
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films/{film_id}/characters:
+    get:
+      operationId: get_film_characters
+      tags:
+        - Films
+      parameters:
+        - name: film_id
+          in: path
+          type: integer
+          required: true
+          description: Film ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films/{film_id}/planets:
+    get:
+      operationId: get_film_planets
+      tags:
+        - Films
+      parameters:
+        - name: film_id
+          in: path
+          type: integer
+          required: true
+          description: Film ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films/{film_id}/starships:
+    get:
+      operationId: get_film_starships
+      tags:
+        - Films
+      parameters:
+        - name: film_id
+          in: path
+          type: integer
+          required: true
+          description: Film ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films/{film_id}/vehicles:
+    get:
+      operationId: get_film_vehicles
+      tags:
+        - Films
+      parameters:
+        - name: film_id
+          in: path
+          type: integer
+          required: true
+          description: Film ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /films/{film_id}/species:
+    get:
+      operationId: get_film_species
+      tags:
+        - Films
+      parameters:
+        - name: film_id
+          in: path
+          type: integer
+          required: true
+          description: Film ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters:
+    get:
+      operationId: list_characters
+      tags:
+        - Characters
+      parameters:
+        - name: search
+          in: query
+          type: string
+          required: false
+          description: Search characters by name
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters/{character_id}:
+    get:
+      operationId: get_character
+      tags:
+        - Characters
+      parameters:
+        - name: character_id
+          in: path
+          type: integer
+          required: true
+          description: Character ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters/{character_id}/films:
+    get:
+      operationId: get_character_films
+      tags:
+        - Characters
+      parameters:
+        - name: character_id
+          in: path
+          type: integer
+          required: true
+          description: Character ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters/{character_id}/vehicles:
+    get:
+      operationId: get_character_vehicles
+      tags:
+        - Characters
+      parameters:
+        - name: character_id
+          in: path
+          type: integer
+          required: true
+          description: Character ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters/{character_id}/starships:
+    get:
+      operationId: get_character_starships
+      tags:
+        - Characters
+      parameters:
+        - name: character_id
+          in: path
+          type: integer
+          required: true
+          description: Character ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters/{character_id}/species:
+    get:
+      operationId: get_character_species
+      tags:
+        - Characters
+      parameters:
+        - name: character_id
+          in: path
+          type: integer
+          required: true
+          description: Character ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /characters/{character_id}/homeworld:
+    get:
+      operationId: get_character_homeworld
+      tags:
+        - Characters
+      parameters:
+        - name: character_id
+          in: path
+          type: integer
+          required: true
+          description: Character ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /planets:
+    get:
+      operationId: list_planets
+      tags:
+        - Planets
+      parameters:
+        - name: search
+          in: query
+          type: string
+          required: false
+          description: Search planets by name
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /planets/{planet_id}:
+    get:
+      operationId: get_planet
+      tags:
+        - Planets
+      parameters:
+        - name: planet_id
+          in: path
+          type: integer
+          required: true
+          description: Planet ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /planets/{planet_id}/films:
+    get:
+      operationId: get_planet_films
+      tags:
+        - Planets
+      parameters:
+        - name: planet_id
+          in: path
+          type: integer
+          required: true
+          description: Planet ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /planets/{planet_id}/residents:
+    get:
+      operationId: get_planet_residents
+      tags:
+        - Planets
+      parameters:
+        - name: planet_id
+          in: path
+          type: integer
+          required: true
+          description: Planet ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /starships:
+    get:
+      operationId: list_starships
+      tags:
+        - Starships
+      parameters:
+        - name: search
+          in: query
+          type: string
+          required: false
+          description: Search starships by name or model
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /starships/{starship_id}:
+    get:
+      operationId: get_starship
+      tags:
+        - Starships
+      parameters:
+        - name: starship_id
+          in: path
+          type: integer
+          required: true
+          description: Starship ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /starships/{starship_id}/films:
+    get:
+      operationId: get_starship_films
+      tags:
+        - Starships
+      parameters:
+        - name: starship_id
+          in: path
+          type: integer
+          required: true
+          description: Starship ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /starships/{starship_id}/pilots:
+    get:
+      operationId: get_starship_pilots
+      tags:
+        - Starships
+      parameters:
+        - name: starship_id
+          in: path
+          type: integer
+          required: true
+          description: Starship ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /vehicles:
+    get:
+      operationId: list_vehicles
+      tags:
+        - Vehicles
+      parameters:
+        - name: search
+          in: query
+          type: string
+          required: false
+          description: Search vehicles by name or model
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /vehicles/{vehicle_id}:
+    get:
+      operationId: get_vehicle
+      tags:
+        - Vehicles
+      parameters:
+        - name: vehicle_id
+          in: path
+          type: integer
+          required: true
+          description: Vehicle ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /vehicles/{vehicle_id}/films:
+    get:
+      operationId: get_vehicle_films
+      tags:
+        - Vehicles
+      parameters:
+        - name: vehicle_id
+          in: path
+          type: integer
+          required: true
+          description: Vehicle ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /vehicles/{vehicle_id}/pilots:
+    get:
+      operationId: get_vehicle_pilots
+      tags:
+        - Vehicles
+      parameters:
+        - name: vehicle_id
+          in: path
+          type: integer
+          required: true
+          description: Vehicle ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /species:
+    get:
+      operationId: list_species
+      tags:
+        - Species
+      parameters:
+        - name: search
+          in: query
+          type: string
+          required: false
+          description: Search species by name
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /species/{species_id}:
+    get:
+      operationId: get_species
+      tags:
+        - Species
+      parameters:
+        - name: species_id
+          in: path
+          type: integer
+          required: true
+          description: Species ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /species/{species_id}/films:
+    get:
+      operationId: get_species_films
+      tags:
+        - Species
+      parameters:
+        - name: species_id
+          in: path
+          type: integer
+          required: true
+          description: Species ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /species/{species_id}/people:
+    get:
+      operationId: get_species_people
+      tags:
+        - Species
+      parameters:
+        - name: species_id
+          in: path
+          type: integer
+          required: true
+          description: Species ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
+
+  /species/{species_id}/homeworld:
+    get:
+      operationId: get_species_homeworld
+      tags:
+        - Species
+      parameters:
+        - name: species_id
+          in: path
+          type: integer
+          required: true
+          description: Species ID
+      x-google-backend:
+        address: https://sw-api-621086386535.southamerica-east1.run.app
+        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: OK
