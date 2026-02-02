@@ -16,3 +16,12 @@ async def get_all_from_array(urls: list[str], request: Request):
     tasks = [get_from_url(url, request) for url in urls]
     responses = await asyncio.gather(*tasks)
     return responses
+
+async def get_all_from_pages(base_url: str, request: Request):
+    all_results = []
+    url = base_url
+    while url:
+        page_data = await get_from_url(url, request)
+        all_results.extend(page_data["results"])
+        url = page_data["next"]
+    return {"count": len(all_results), "results": all_results}

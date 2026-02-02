@@ -2,10 +2,13 @@ from app.api.router import species_router as router
 from app.utils import helpers
 from fastapi import Request
 
-# Endpoint para solicitar dados de todas as espécies
+# Endpoint para solicitar dados das espécies baseado em filtros de busca e paginação
+# Padrão: Retorna a primeira página sem filtro de busca
 @router.get("/")
-async def get_species(request: Request, search: str = ""):
-    return await helpers.get_from_url(f"https://swapi.dev/api/species/?search={search}", request)
+async def get_species(request: Request, search: str = "", page: str = ""):
+    if page:
+        return await helpers.get_from_url(f"https://swapi.dev/api/species/?search={search}&page={page}", request)
+    return await helpers.get_all_from_pages(f"https://swapi.dev/api/species/?search={search}", request)
 
 # Endpoint para solicitar dados de uma espécie específica pelo ID
 @router.get("/{species_id}")

@@ -2,10 +2,13 @@ from app.api.router import vehicles_router as router
 from app.utils import helpers
 from fastapi import Request
 
-# Endpoint para solicitar dados de todas os veículos
+# Endpoint para solicitar dados dos veículos baseado em filtros de busca e paginação
+# Padrão: Retorna a primeira página sem filtro de busca
 @router.get("/")
-async def get_vehicles(request: Request, search: str = ""):
-    return await helpers.get_from_url(f"https://swapi.dev/api/vehicles/?search={search}", request)
+async def get_vehicles(request: Request, search: str = "", page: str = ""):
+    if page:
+        return await helpers.get_from_url(f"https://swapi.dev/api/vehicles/?search={search}&page={page}", request)
+    return await helpers.get_all_from_pages(f"https://swapi.dev/api/vehicles/?search={search}", request)
 
 # Endpoint para solicitar dados de um veículo específico pelo ID
 @router.get("/{vehicle_id}")
