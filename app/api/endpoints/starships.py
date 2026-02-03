@@ -5,10 +5,10 @@ from fastapi import Request
 # Endpoint para solicitar dados das naves espaciais baseado em filtros de busca e paginação
 # Padrão: Retorna a primeira página sem filtro de busca
 @router.get("/")
-async def get_starships(request: Request, search: str = "", page: str = ""):
+async def get_starships(request: Request, search: str = "", page: str = "", order_by: str = "", reverse: bool = False):
     if page:
-        return await helpers.get_from_url(f"https://swapi.dev/api/starships/?search={search}&page={page}", request)
-    return await helpers.get_all_from_pages(f"https://swapi.dev/api/starships/?search={search}", request)
+        return await helpers.get_from_url(f"https://swapi.dev/api/starships/?search={search}&page={page}", request, order_by, reverse)
+    return await helpers.get_all_from_pages(f"https://swapi.dev/api/starships/?search={search}", request, order_by, reverse)
 
 # Endpoint para solicitar dados de uma nave espacial específica pelo ID
 @router.get("/{starship_id}")
