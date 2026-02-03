@@ -19,6 +19,31 @@ def test_vehicle_search_endpoint(client):
     results = response.json().get("results", [])
     assert any(search_query.lower() in vehicle["name"].lower() for vehicle in results)
 
+# Teste do endpoint de paginação de veículos
+def test_vehicle_pagination_endpoint(client):
+    page_number = 1
+    response = client.get(f"/vehicles/?page={page_number}")
+    assert response.status_code == 200
+    assert "next" in response.json().keys()  # Verifica se está no formato paginado
+
+# Teste do endpoint de ordenação de veículos
+def test_vehicle_ordering_endpoint(client):
+    order_by = "name"
+    response = client.get(f"/vehicles/?order_by={order_by}")
+    assert response.status_code == 200
+    results = response.json().get("results", [])
+    names = [vehicle["name"] for vehicle in results]
+    assert names == sorted(names)
+
+# Teste do endpoint de ordenação reversa de veículos
+def test_vehicle_ordering_reverse_endpoint(client):
+    order_by = "name"
+    response = client.get(f"/vehicles/?order_by={order_by}&reverse=true")
+    assert response.status_code == 200
+    results = response.json().get("results", [])
+    names = [vehicle["name"] for vehicle in results]
+    assert names == sorted(names, reverse=True)
+
 # Teste do endpoint de veículo específico pelo ID
 def test_vehicle_details_endpoint(client):
     vehicle_id = 4
