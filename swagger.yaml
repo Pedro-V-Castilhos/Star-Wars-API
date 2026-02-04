@@ -28,6 +28,21 @@ paths:
           type: string
           required: false
           description: Search films by title
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: order_by
+          in: query
+          type: string
+          required: false
+          description: Sort films by field (e.g., title, release_date)
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+          description: Set to true for descending order
       x-google-backend:
         address: https://sw-api-621086386535.southamerica-east1.run.app
         jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
@@ -161,6 +176,21 @@ paths:
           type: string
           required: false
           description: Search characters by name
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: order_by
+          in: query
+          type: string
+          required: false
+          description: Sort characters by field (e.g., name, birth_year)
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+          description: Set to true for descending order
       x-google-backend:
         address: https://sw-api-621086386535.southamerica-east1.run.app
         jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
@@ -294,6 +324,21 @@ paths:
           type: string
           required: false
           description: Search planets by name
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: order_by
+          in: query
+          type: string
+          required: false
+          description: Sort planets by field (e.g., name, population)
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+          description: Set to true for descending order
       x-google-backend:
         address: https://sw-api-621086386535.southamerica-east1.run.app
         jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
@@ -370,6 +415,21 @@ paths:
           type: string
           required: false
           description: Search starships by name or model
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: order_by
+          in: query
+          type: string
+          required: false
+          description: Sort starships by field (e.g., name, model)
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+          description: Set to true for descending order
       x-google-backend:
         address: https://sw-api-621086386535.southamerica-east1.run.app
         jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
@@ -446,6 +506,21 @@ paths:
           type: string
           required: false
           description: Search vehicles by name or model
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: order_by
+          in: query
+          type: string
+          required: false
+          description: Sort vehicles by field (e.g., name, model)
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+          description: Set to true for descending order
       x-google-backend:
         address: https://sw-api-621086386535.southamerica-east1.run.app
         jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
@@ -522,6 +597,21 @@ paths:
           type: string
           required: false
           description: Search species by name
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: order_by
+          in: query
+          type: string
+          required: false
+          description: Sort species by field (e.g., name, classification)
+        - name: reverse
+          in: query
+          type: boolean
+          required: false
+          description: Set to true for descending order
       x-google-backend:
         address: https://sw-api-621086386535.southamerica-east1.run.app
         jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app

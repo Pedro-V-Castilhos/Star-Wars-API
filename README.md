@@ -24,7 +24,7 @@ API REST robusta e de alta performance para consumo especializado de dados sobre
 - **anysqlite 0.0.5** - Driver SQLite assíncrono
 - **uvicorn 0.40.0** - Servidor ASGI
 
-### Desenvolvimento e Testes
+### Testes
 
 - **pytest 9.0.2** - Framework de testes robusto e flexível
 - **pytest-cov 7.0.0** - Plugin para análise de cobertura de código
@@ -473,7 +473,7 @@ A API implementa **validação completa de erros** e nunca retorna HTTP 500 ao c
 
 O projeto implementa testes unitários abrangentes usando **pytest** com análise de cobertura via **pytest-cov**.
 
-### 🆕 Novos Testes de Validação
+### Testes de Validação
 
 Além dos testes funcionais, o projeto inclui **testes de validação de erros** para garantir que a API retorne os códigos HTTP corretos:
 
