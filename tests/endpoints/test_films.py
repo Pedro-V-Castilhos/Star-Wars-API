@@ -30,3 +30,15 @@ def test_film_ordering_endpoint(client):
 def test_film_details_endpoint(client):
     helpers.test_response_by_field(client, "/films/1/", "title", "A New Hope")
 
+# Teste de respostas negativas para filme específico pelo ID
+def test_film_not_found_endpoint(client):
+    helpers.test_not_found_response(client, "/films/9999/")  # Assuming 9999 is an invalid ID
+
+def test_film_invalid_ordering_endpoint(client):
+    helpers.test_invalid_ordering_response(client, "/films/", "invalid_field")
+
+def test_film_invalid_pagination_endpoint(client):
+    helpers.test_invalid_pagination_response(client, "/films/", -1)  # Invalid page number
+
+def test_film_invalid_parameter_endpoint(client):
+    helpers.test_invalid_parameter_response(client, "/films/", "invalid_param=value")

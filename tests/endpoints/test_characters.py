@@ -32,3 +32,16 @@ def test_character_details_endpoint(client):
 # Teste do endpoint do planeta natal de um personagem específico pelo ID
 def test_character_homeworld_endpoint(client):
     helpers.test_response_by_field(client, "/characters/1/homeworld", "name", "Tatooine")
+
+# Teste de respostas negativas para personagem específico pelo ID
+def test_character_not_found_endpoint(client):
+    helpers.test_not_found_response(client, "/characters/9999/")  # Assuming 9999 is an invalid ID
+
+def test_character_invalid_ordering_endpoint(client):
+    helpers.test_invalid_ordering_response(client, "/characters/", "invalid_field")
+
+def test_character_invalid_pagination_endpoint(client):
+    helpers.test_invalid_pagination_response(client, "/characters/", -1)  # Invalid page number
+
+def test_character_invalid_parameter_endpoint(client):
+    helpers.test_invalid_parameter_response(client, "/characters/", "invalid_param=value")

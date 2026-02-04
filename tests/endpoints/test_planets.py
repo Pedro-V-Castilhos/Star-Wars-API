@@ -26,3 +26,16 @@ def test_planet_ordering_endpoint(client):
 # Teste do endpoint de planeta específico pelo ID
 def test_planet_details_endpoint(client):
     helpers.test_response_by_field(client, "/planets/1/", "name", "Tatooine")
+
+# Teste de respostas negativas para planeta específico pelo ID
+def test_planet_not_found_endpoint(client):
+    helpers.test_not_found_response(client, "/planets/9999/")  # Assuming 9999 is an invalid ID
+
+def test_planet_invalid_ordering_endpoint(client):
+    helpers.test_invalid_ordering_response(client, "/planets/", "invalid_field")
+
+def test_planet_invalid_pagination_endpoint(client):
+    helpers.test_invalid_pagination_response(client, "/planets/", -1)  # Invalid page number
+
+def test_planet_invalid_parameter_endpoint(client):
+    helpers.test_invalid_parameter_response(client, "/planets/", "invalid_param=value")
