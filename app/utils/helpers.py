@@ -1,7 +1,7 @@
 from fastapi import Request, HTTPException
 import asyncio
 import httpx
-import errors
+import app.utils.errors as errors
 
 # Validação do parâmetro de página
 def validate_page_parameter(page: str) -> None:
