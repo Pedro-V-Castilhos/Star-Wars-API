@@ -10,8 +10,8 @@ paths:
     get:
       operationId: root
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -44,8 +44,8 @@ paths:
           required: false
           description: Set to true for descending order
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -63,8 +63,8 @@ paths:
           required: true
           description: Film ID (1-6)
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -82,8 +82,8 @@ paths:
           required: true
           description: Film ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -101,8 +101,8 @@ paths:
           required: true
           description: Film ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -120,8 +120,8 @@ paths:
           required: true
           description: Film ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -139,8 +139,8 @@ paths:
           required: true
           description: Film ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -158,8 +158,8 @@ paths:
           required: true
           description: Film ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -192,8 +192,8 @@ paths:
           required: false
           description: Set to true for descending order
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -211,8 +211,8 @@ paths:
           required: true
           description: Character ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -230,8 +230,8 @@ paths:
           required: true
           description: Character ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -249,8 +249,8 @@ paths:
           required: true
           description: Character ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -268,8 +268,8 @@ paths:
           required: true
           description: Character ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -287,8 +287,8 @@ paths:
           required: true
           description: Character ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -306,8 +306,8 @@ paths:
           required: true
           description: Character ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -340,8 +340,8 @@ paths:
           required: false
           description: Set to true for descending order
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -359,8 +359,8 @@ paths:
           required: true
           description: Planet ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -378,8 +378,8 @@ paths:
           required: true
           description: Planet ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -397,8 +397,8 @@ paths:
           required: true
           description: Planet ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -431,8 +431,8 @@ paths:
           required: false
           description: Set to true for descending order
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -450,8 +450,8 @@ paths:
           required: true
           description: Starship ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -469,8 +469,8 @@ paths:
           required: true
           description: Starship ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -488,8 +488,8 @@ paths:
           required: true
           description: Starship ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -522,8 +522,8 @@ paths:
           required: false
           description: Set to true for descending order
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -541,8 +541,8 @@ paths:
           required: true
           description: Vehicle ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -560,8 +560,8 @@ paths:
           required: true
           description: Vehicle ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -579,8 +579,8 @@ paths:
           required: true
           description: Vehicle ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -613,8 +613,8 @@ paths:
           required: false
           description: Set to true for descending order
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -632,8 +632,8 @@ paths:
           required: true
           description: Species ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -651,8 +651,8 @@ paths:
           required: true
           description: Species ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -670,8 +670,8 @@ paths:
           required: true
           description: Species ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
@@ -689,8 +689,8 @@ paths:
           required: true
           description: Species ID
       x-google-backend:
-        address: https://sw-api-621086386535.southamerica-east1.run.app
-        jwt_audience: https://sw-api-621086386535.southamerica-east1.run.app
+        address: https://sw-api-874003816990.southamerica-east1.run.app
+        jwt_audience: https://sw-api-874003816990.southamerica-east1.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
