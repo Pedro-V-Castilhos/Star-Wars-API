@@ -1,17 +1,51 @@
 # Star Wars API
 
-API REST robusta e de alta performance para consumo especializado de dados sobre o universo de Star Wars, funcionando como camada intermediária entre o Front End e a [SWAPI](https://swapi.dev/). Implementa cache HTTP, validação completa de erros, paginação, busca e ordenação de resultados.
+API REST de alta performance para consumo de dados do universo Star Wars, operando como camada intermediária entre aplicações cliente e a [SWAPI](https://swapi.dev/). Implementa cache HTTP com persistência SQLite, validação completa de erros HTTP, paginação de resultados, busca parametrizada e ordenação customizável.
 
 ## ✨ Principais Características
 
-- 🚀 **34 endpoints** organizados em 6 recursos principais
-- 🔍 **Busca avançada** com query parameter `?search=`
-- 📄 **Paginação** opcional com `?page=`
-- 🔄 **Ordenação** de resultados com `?order_by=` e `?reverse=`
-- ✅ **Validação completa de erros** (nunca retorna HTTP 500)
-- ⚡ **Cache HTTP automático** para otimizar performance
-- 🧪 **Cobertura de testes unitários** com pytest
-- 📚 **Documentação interativa** automática com Swagger UI
+- 🚀 **34 endpoints RESTful** organizados em 6 recursos principais
+- 🔍 **Sistema de busca** via query parameter `?search=`
+- 📄 **Paginação configurável** com `?page=`
+- 🔄 **Ordenação de resultados** com `?order_by=` e `?reverse=`
+- ✅ **Tratamento robusto de exceções** (nunca retorna HTTP 500)
+- ⚡ **Cache HTTP automático** com backend SQLite assíncrono
+- 🧪 **Cobertura de testes unitários** com pytest e pytest-cov
+- 📚 **Documentação OpenAPI** automática com Swagger UI e ReDoc
+- ☁️ **Deploy em produção** no Google Cloud Platform via Cloud Run e API Gateway
+
+## 🌐 Acesso à API em Produção
+
+A API está disponível em produção através do Google Cloud API Gateway:
+
+### **URL Base de Produção:**
+
+```
+https://sw-api-b5ifb19a.ue.gateway.dev/
+```
+
+### **Exemplos de Uso:**
+
+```bash
+# Listar todos os filmes
+curl https://sw-api-b5ifb19a.ue.gateway.dev/films/
+
+# Buscar personagem por nome
+curl https://sw-api-b5ifb19a.ue.gateway.dev/characters/?search=luke
+
+# Obter detalhes de um planeta
+curl https://sw-api-b5ifb19a.ue.gateway.dev/planets/1
+
+# Listar naves ordenadas por nome
+curl https://sw-api-b5ifb19a.ue.gateway.dev/starships/?order_by=name
+```
+
+### **Documentação Interativa em Produção:**
+
+- **Swagger UI**: [https://sw-api-b5ifb19a.ue.gateway.dev/docs](https://sw-api-b5ifb19a.ue.gateway.dev/docs)
+- **ReDoc**: [https://sw-api-b5ifb19a.ue.gateway.dev/redoc](https://sw-api-b5ifb19a.ue.gateway.dev/redoc)
+
+> **Nota:** A API em produção utiliza autenticação IAM gerenciada pelo Google Cloud para comunicação entre API Gateway e Cloud Run, garantindo segurança e controle de acesso.
 
 ## 🚀 Tecnologias
 
@@ -49,7 +83,9 @@ cd Star-Wars-API
 pip install -r requirements.txt
 ```
 
-## 🎯 Como Executar
+## 🎯 Execução Local (Desenvolvimento)
+
+Para desenvolvimento e testes locais, você pode executar a API em sua máquina:
 
 ### Modo de desenvolvimento (com reload automático):
 
@@ -57,7 +93,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Modo de produção:
+### Modo de produção local:
 
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000
@@ -69,20 +105,147 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 uvicorn app.main:app --reload --port 3000
 ```
 
-A API estará disponível em: `http://localhost:8000`
+A API estará disponível localmente em: `http://localhost:8000`
 
-### 📖 Documentação Automática
+### 📖 Documentação Automática (Ambiente Local)
 
-O FastAPI gera automaticamente documentação interativa completa de todos os endpoints:
+Em ambiente local, a documentação interativa estará disponível em:
 
-- **Swagger UI**: `http://localhost:8000/docs` - Interface interativa para testar endpoints
-- **ReDoc**: `http://localhost:8000/redoc` - Documentação alternativa em formato limpo
+- **Swagger UI**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
 
-Ambas interfaces permitem explorar todos os 34 endpoints da API, ver schemas de resposta e executar requisições diretamente do navegador.
+> **Recomendação:** Para testar a API completa, utilize o [ambiente de produção](#-acesso-à-api-em-produção) que já está configurado e disponível.
+
+## ☁️ Implementação Google Cloud Platform
+
+A API foi implementada em ambiente de produção utilizando serviços da Google Cloud Platform (GCP), seguindo arquitetura serverless com gerenciamento de acesso via Identity and Access Management (IAM).
+
+### Arquitetura de Deploy
+
+#### 1. **Containerização com Docker**
+
+A aplicação foi containerizada utilizando o [Dockerfile](Dockerfile) presente no repositório:
+
+```dockerfile
+FROM python:3.11.14-alpine3.23
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+COPY . /app
+EXPOSE 8080
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
+```
+
+**Características da imagem:**
+
+- Base image Alpine Linux para otimização de tamanho
+- Variáveis de ambiente Python otimizadas para produção
+- Porta configurável via variável de ambiente `$PORT`
+- Servidor ASGI Uvicorn para alta performance
+
+#### 2. **Deploy no Cloud Run**
+
+O container Docker foi implantado no **Google Cloud Run**, serviço serverless gerenciado que oferece:
+
+- Auto-scaling baseado em demanda
+- Cobrança por uso (pay-per-request)
+- HTTPS nativo e certificados gerenciados
+- Validação IAM para controle de acesso
+
+**Endpoint do Cloud Run:**
+
+```
+https://sw-api-874003816990.southamerica-east1.run.app
+```
+
+#### 3. **Documentação OpenAPI com Swagger**
+
+Foi criado o arquivo [swagger.yaml](swagger.yaml) seguindo especificação OpenAPI 2.0, documentando:
+
+- Todos os 34 endpoints da API
+- Parâmetros de query (search, page, order_by, reverse)
+- Schemas de resposta
+- Definições de recursos
+
+O arquivo aponta para o backend do Cloud Run, permitindo validação da API em produção.
+
+#### 4. **API Gateway**
+
+O [swagger.yaml](swagger.yaml) foi utilizado para provisionar um **API Gateway** no Google Cloud, oferecendo:
+
+- Ponto de entrada unificado para a API
+- Gerenciamento de tráfego e rate limiting
+- Autenticação e autorização via IAM
+- Monitoramento e logging centralizado
+
+### 🔗 URL Pública de Produção
+
+**A API está disponível publicamente através do API Gateway:**
+
+```
+https://sw-api-b5ifb19a.ue.gateway.dev
+```
+
+**Endpoints principais:**
+
+- Base: `https://sw-api-b5ifb19a.ue.gateway.dev/`
+- Filmes: `https://sw-api-b5ifb19a.ue.gateway.dev/films/`
+- Personagens: `https://sw-api-b5ifb19a.ue.gateway.dev/characters/`
+- Planetas: `https://sw-api-b5ifb19a.ue.gateway.dev/planets/`
+- Naves: `https://sw-api-b5ifb19a.ue.gateway.dev/starships/`
+- Veículos: `https://sw-api-b5ifb19a.ue.gateway.dev/vehicles/`
+- Espécies: `https://sw-api-b5ifb19a.ue.gateway.dev/species/`
+
+**Documentação interativa:**
+
+- Swagger UI: `https://sw-api-b5ifb19a.ue.gateway.dev/docs`
+- ReDoc: `https://sw-api-b5ifb19a.ue.gateway.dev/redoc`
+
+#### 5. **Fluxo de Requisições**
+
+```
+Cliente → API Gateway → Cloud Run (Container) → SWAPI
+          (IAM Auth)     (IAM Auth)           (Cache HTTP)
+```
+
+### Segurança
+
+- ✅ Autenticação IAM entre API Gateway e Cloud Run
+- ✅ HTTPS obrigatório em todas as comunicações
+- ✅ Validação de requisições no Gateway
+- ✅ Isolamento de rede do container
+
+### Monitoramento
+
+- Cloud Logging para análise de logs
+- Cloud Monitoring para métricas de performance
+- Traces distribuídos para debugging
 
 ## 📚 Endpoints da API
 
 A API fornece **34 endpoints** organizados em 6 recursos principais.
+
+### 🔍 Parâmetros de Busca por Recurso
+
+O parâmetro `search` permite filtrar resultados com base em campos específicos de cada recurso. A busca é delegada à API SWAPI, que realiza correspondência parcial (case-insensitive) nos campos especificados:
+
+| Recurso         | Endpoint      | Campo(s) Pesquisado(s) | Exemplo                                      |
+| --------------- | ------------- | ---------------------- | -------------------------------------------- |
+| **Personagens** | `/characters` | `name`                 | `?search=luke` - busca por nome              |
+| **Filmes**      | `/films`      | `title`                | `?search=empire` - busca por título          |
+| **Planetas**    | `/planets`    | `name`                 | `?search=tatooine` - busca por nome          |
+| **Naves**       | `/starships`  | `name`, `model`        | `?search=falcon` - busca por nome ou modelo  |
+| **Veículos**    | `/vehicles`   | `name`, `model`        | `?search=speeder` - busca por nome ou modelo |
+| **Espécies**    | `/species`    | `name`                 | `?search=wookiee` - busca por nome           |
+
+**Observações importantes:**
+
+- A busca é processada pela SWAPI, não pela aplicação
+- Correspondência parcial: `?search=sky` encontra "Skywalker", "Skye", etc.
+- Case-insensitive: maiúsculas e minúsculas são ignoradas
+- Naves e veículos permitem busca em dois campos simultaneamente
 
 ### 🆕 Recursos Avançados dos Endpoints
 
@@ -469,6 +632,48 @@ A API implementa **validação completa de erros** e nunca retorna HTTP 500 ao c
 
 ---
 
+## ⚠️ Avisos Importantes
+
+### Inconsistências nos Dados da API Fonte
+
+Esta API consome dados da [SWAPI (Star Wars API)](https://swapi.dev), que é mantida pela comunidade e pode conter inconsistências estruturais nos dados retornados:
+
+**Problemas conhecidos:**
+
+- ❌ **Dados faltantes**: Alguns recursos possuem campos vazios ou nulos
+- ❌ **Índices ausentes**: Certos IDs podem não existir na sequência
+- ❌ **Arrays vazios**: Relacionamentos podem retornar listas vazias mesmo quando deveriam conter dados
+- ❌ **URLs inválidas**: Algumas referências de recursos podem apontar para endpoints inexistentes
+
+**Exemplos de inconsistências:**
+
+```json
+// Exemplo: Personagem com homeworld null
+{
+  "name": "Character Name",
+  "homeworld": null,
+  "films": []
+}
+
+// Exemplo: Índices faltantes na sequência
+// /api/species/1/ existe
+// /api/species/2/ retorna 404
+// /api/species/3/ existe
+```
+
+**Impacto na aplicação:**
+
+- Esta API replica fielmente os dados da SWAPI, incluindo suas inconsistências
+- Erros 404 podem ocorrer para IDs válidos na sequência numérica
+- Campos vazios são retornados conforme recebidos da fonte
+- A validação implementada trata esses casos retornando códigos HTTP apropriados
+
+**Recomendação:** Implemente tratamento de dados ausentes nas aplicações cliente que consomem esta API.
+
+**Consulte a documentação oficial:** [https://swapi.dev](https://swapi.dev)
+
+---
+
 ## 🧪 Testes Automatizados
 
 O projeto implementa testes unitários abrangentes usando **pytest** com análise de cobertura via **pytest-cov**.
@@ -794,6 +999,7 @@ prompts/
 ├── 03.md          # Testes automatizados e documentação
 ├── 04.md          # 🆕 Implementação de validação de erros completa
 ├── 05.md          # 🆕 Atualização da documentação
+├── 06.md          # 🆕 Atualização da documentação
 └── Context.md     # Contexto e instruções para o desenvolvimento
 ```
 
@@ -805,45 +1011,123 @@ Esta organização permite:
 
 ---
 
-## 🎓 Aprendizados e Boas Práticas
+## 🎓 Princípios de Engenharia de Software
 
-Este projeto demonstra diversas boas práticas de desenvolvimento:
+Este projeto implementa princípios consolidados de engenharia de software:
 
 ### 1. Validação Defensiva
 
-- Nunca confiar em dados externos
-- Validar todos os inputs antes do processamento
-- Retornar códigos HTTP apropriados
+- Validação de dados de entrada em todas as camadas
+- Sanitização de parâmetros externos antes do processamento
+- Retorno de códigos de status HTTP semanticamente corretos
+- Tratamento explícito de exceções com mensagens descritivas
 
-### 2. Reutilização de Código
+### 2. DRY (Don't Repeat Yourself)
 
-- Helpers para eliminar duplicação
-- Exceções customizadas para contexto específico
-- Testes unitários com funções auxiliares
+- Helpers reutilizáveis para eliminação de duplicação de código
+- Exceções customizadas para tratamento específico de domínio
+- Fixtures compartilhadas em testes para consistência
+- Funções auxiliares de teste para validação de cenários comuns
 
-### 3. Performance
+### 3. Otimização de Performance
 
-- Cache HTTP automático
-- Requisições assíncronas paralelas
-- Cliente HTTP global compartilhado
+- Cache HTTP com persistência SQLite assíncrona
+- Paralelização de requisições com `asyncio.gather()`
+- Cliente HTTP global com gerenciamento de lifecycle
+- Minimização de I/O bloqueante
 
-### 4. Testabilidade
+### 4. Design para Testabilidade
 
-- Fixture compartilhada para consistência
-- Testes parametrizados para eficiência
-- Cobertura de cenários positivos e negativos
+- Injeção de dependências via `Request.app.state`
+- Testes parametrizados para cobertura eficiente
+- Fixtures pytest para isolamento de testes
+- Cobertura de happy path e edge cases
 
-### 5. Documentação
+### 5. Documentação como Código
 
-- README abrangente e bem estruturado
-- Documentação automática com Swagger
-- Histórico de prompts para rastreabilidade
+- Documentação OpenAPI gerada automaticamente via type hints
+- README estruturado com exemplos práticos
+- Histórico versionado de decisões arquiteturais
+- Comentários descritivos em código complexo
 
 ---
 
-## �📝 Licença
+## 🔮 Propostas Futuras
 
-Este projeto está sob a licença MIT.
+O projeto está em constante evolução. As seguintes funcionalidades estão planejadas para implementação futura:
+
+### 1. **CI/CD Automático**
+
+**Objetivo:** Automatizar pipeline de integração e deploy contínuo.
+
+**Implementação planejada:**
+
+- GitHub Actions para execução automática de testes
+- Build automático da imagem Docker em cada push
+- Deploy automático no Cloud Run após aprovação
+- Validação de cobertura de testes mínima (threshold)
+- Análise estática de código com pylint/flake8
+- Versionamento semântico automático
+
+**Benefícios:**
+
+- Redução de erros humanos no deploy
+- Feedback rápido sobre qualidade do código
+- Deploys mais frequentes e confiáveis
+- Rastreabilidade de mudanças
+
+### 2. **Opções de Listagem para Arrays de URL**
+
+**Objetivo:** Permitir ordenação e paginação de recursos relacionados.
+
+**Funcionalidade proposta:**
+
+Atualmente, endpoints de relacionamento retornam arrays simples:
+
+```bash
+# Estado atual
+GET /characters/1/films
+# Retorna: {"results": [{film1}, {film2}, {film3}]}
+```
+
+**Nova funcionalidade:**
+
+```bash
+# Ordenar filmes do personagem por título
+GET /characters/1/films?order_by=title
+
+# Ordenar naves do personagem por nome (descendente)
+GET /characters/1/starships?order_by=name&reverse=true
+
+# Paginar veículos do filme
+GET /films/1/vehicles?page=1&order_by=model
+```
+
+**Endpoints afetados:**
+
+- `/films/{id}/characters`, `/films/{id}/planets`, `/films/{id}/starships`, etc.
+- `/characters/{id}/films`, `/characters/{id}/vehicles`, `/characters/{id}/starships`, etc.
+- Todos os 21 endpoints de recursos relacionados
+
+**Implementação técnica:**
+
+- Aplicar ordenação nos resultados agregados após busca paralela
+- Manter paralelização de requisições para performance
+- Validar campos de ordenação específicos para cada tipo de recurso
+
+**Benefícios:**
+
+- Maior flexibilidade para aplicações cliente
+- Melhor UX em listagens longas
+- Consistência com endpoints de listagem principal
+
+### 3. **Outras Melhorias Planejadas**
+
+- **Rate Limiting**: Implementar limites de taxa por IP/cliente
+- **Métricas**: Dashboard de uso e performance da API
+- **Cache Configurável**: TTL customizável por recurso
+- **Webhooks**: Notificações de mudanças nos dados
+- **GraphQL**: Endpoint alternativo para queries complexas
 
 ## 👤 Autor
 
